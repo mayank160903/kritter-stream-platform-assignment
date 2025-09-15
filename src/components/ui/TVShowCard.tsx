@@ -52,17 +52,23 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
 
         {/* Show Info */}
         <div className="p-4 space-y-3">
-          <h3 className="font-semibold text-white text-lg leading-tight line-clamp-2 group-hover/card:text-blue-400 transition-colors">
-            {show.name}
-          </h3>
+          {/* Fixed-height title area with hover marquee to reveal full title */}
+          <div className="marquee h-12">
+            <h3 className="marquee-content font-semibold text-white text-lg leading-tight group-hover/card:text-blue-400 transition-colors">
+              {show.name}
+            </h3>
+          </div>
           
-          {show.overview && (
-            <p className="text-gray-300 text-sm line-clamp-3 leading-relaxed">
+          {/* Fixed-height overview area to keep cards equal */}
+          {show.overview ? (
+            <p className="text-gray-300 text-sm line-clamp-3 leading-relaxed h-[3.75rem]">
               {truncateText(show.overview, 120)}
             </p>
+          ) : (
+            <div className="h-[3.75rem]" />
           )}
           
-          <div className="flex items-center justify-between text-sm text-gray-400 pt-1">
+          <div className="flex items-center justify-between text-sm text-gray-400 pt-1 h-6">
             {show.first_air_date && (
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4 flex-shrink-0" />
@@ -118,9 +124,11 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
         </div>
 
         <div className="p-3 space-y-2">
-          <h3 className="font-medium text-white text-sm leading-tight line-clamp-2 group-hover/card:text-blue-400 transition-colors">
-            {show.name}
-          </h3>
+          <div className="marquee h-8">
+            <h3 className="marquee-content font-medium text-white text-sm leading-tight group-hover/card:text-blue-400 transition-colors">
+              {show.name}
+            </h3>
+          </div>
           
           {show.first_air_date && (
             <div className="flex items-center gap-1 text-gray-400 text-xs">

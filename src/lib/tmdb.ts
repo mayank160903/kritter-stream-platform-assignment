@@ -75,6 +75,24 @@ export class TMDBService {
     }
   }
 
+  // Discover TV shows by genre
+  static async getShowsByGenre(genreId: number, page: number = 1, language: string = 'en-US'): Promise<TMDBResponse<TVShow>> {
+    try {
+      const response = await tmdbApi.get('/discover/tv', {
+        params: {
+          with_genres: String(genreId),
+          sort_by: 'popularity.desc',
+          page,
+          language,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching shows by genre:', error);
+      throw new Error('Failed to fetch shows by genre');
+    }
+  }
+
   // Search TV shows
   static async searchShows(params: SearchParams): Promise<TMDBResponse<TVShow>> {
     const { query, page = 1, language = 'en-US' } = params;

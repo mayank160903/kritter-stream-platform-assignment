@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import { TVShow } from '@/types/tmdb';
-import { useSearchShows } from '@/hooks/useTMDB';
+import { useSearchShows, useTypeaheadShows } from '@/hooks/useTMDB';
 import { TVShowCardCompact } from './TVShowCard';
 
 interface SearchBarProps {
@@ -23,6 +23,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   
   const { data: searchResults, loading, error } = useSearchShows(query, query.length > 2);
+  const { suggestions } = useTypeaheadShows(query);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -129,6 +130,25 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             </div>
           ) : searchResults?.results && searchResults.results.length > 0 ? (
             <div className="p-2">
+              {/* Typeahead suggestions row */}
+              {suggestions.length > 0 && (
+                <div className="px-2 pb-2">
+                  <div className="flex flex-wrap gap-2">
+                    {suggestions.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => {
+                          setQuery(s);
+                          inputRef.current?.focus();
+                        }}
+                        className="text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 px-2 py-1 rounded"
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
               {searchResults.results.slice(0, 8).map((show, index) => (
                 <button
                   key={show.id}

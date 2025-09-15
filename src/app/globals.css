@@ -69,3 +69,24 @@ html {
   background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
   background-size: 200px 100%;
 }
+
+/* Marquee for overflowing titles inside fixed-height containers */
+.marquee {
+  position: relative;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 2rem;
+}
+
+.marquee:hover .marquee-content {
+  animation: marquee-scroll 7s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}

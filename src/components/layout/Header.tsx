@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { SearchBar } from '@/components/ui/SearchBar';
 import { TVShow } from '@/types/tmdb';
@@ -51,6 +51,41 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
             >
               Top Rated
             </Link>
+            {(() => {
+              const [open, setOpen] = useState(false);
+              return (
+                <div 
+                  className="relative"
+                  onMouseEnter={() => setOpen(true)}
+                  onMouseLeave={() => setOpen(false)}
+                >
+                  <button 
+                    className="text-gray-300 hover:text-white transition-colors font-medium"
+                    onFocus={() => setOpen(true)}
+                    onBlur={() => setOpen(false)}
+                  >
+                    Genres
+                  </button>
+                  {open && (
+                    <div className="absolute right-0 top-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg min-w-[220px] z-50 pt-2">
+                      {/* The top padding creates a hover buffer, preventing flicker when moving from button to menu */}
+                      <div className="py-2 max-h-80 overflow-y-auto">
+                        {require('@/lib/genres').TV_GENRES.map((g: {id:number; name:string}) => (
+                          <Link
+                            key={g.id}
+                            href={`/genres/${g.id}`}
+                            className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white"
+                            onClick={() => setOpen(false)}
+                          >
+                            {g.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </nav>
 
           {/* Mobile menu button */}

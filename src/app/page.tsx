@@ -2,7 +2,10 @@
 
 import React from 'react';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { HorizontalCarousel } from '@/components/carousel/HorizontalCarousel';
+import { TV_GENRES } from '@/lib/genres';
+import { GenreCarousel } from '@/components/GenreCarousel';
 import { useTrendingShows, useTopRatedShows, usePopularShows } from '@/hooks/useTMDB';
 import { TVShow } from '@/types/tmdb';
 
@@ -77,8 +80,14 @@ export default function Home() {
             shows={popularData?.results || []}
             loading={popularLoading}
           />
+
+          {/* Genre carousels */}
+          {TV_GENRES.slice(0, 6).map((genre) => (
+            <GenreCarousel key={genre.id} genreId={genre.id} title={genre.name} />
+          ))}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

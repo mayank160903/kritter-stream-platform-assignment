@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { EpisodeCard } from '@/components/ui/EpisodeCard';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { useShowDetails, useSeasonDetails } from '@/hooks/useTMDB';
@@ -200,6 +201,7 @@ export default function ShowDetailsPage() {
           )}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

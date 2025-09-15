@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { TMDBService } from '@/lib/tmdb';
 import { TVShow, TVShowDetails, SeasonDetails, TMDBResponse } from '@/types/tmdb';
+import { TV_GENRES } from '@/lib/genres';
 
 // Hook for fetching trending shows
 export const useTrendingShows = (timeWindow: 'day' | 'week' = 'day') => {
@@ -113,6 +114,70 @@ export const useSearchShows = (query: string, enabled: boolean = true) => {
   }, [query, searchShows]);
 
   return { data, loading, error, searchShows };
+};
+
+// Lightweight type-ahead suggestions (names only)
+export const useTypeaheadShows = (query: string) => {
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchSuggestions = useCallback(async (searchQuery: string) => {
+    if (!searchQuery.trim()) {
+      setSuggestions([]);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+      const result = await TMDBService.searchShows({ query: searchQuery });
+      const names = (result.results || [])
+        .map((s) => s.name)
+        .filter(Boolean)
+        .slice(0, 6);
+      setSuggestions(names);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch suggestions');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      fetchSuggestions(query);
+    }, 200);
+    return () => clearTimeout(id);
+  }, [query, fetchSuggestions]);
+
+  return { suggestions, loading, error };
+};
+
+// Hook to fetch shows for a single genre id
+export const useGenreShows = (genreId: number) => {
+  const [data, setData] = useState<TMDBResponse<TVShow> | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const result = await TMDBService.getShowsByGenre(genreId);
+      setData(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch genre shows');
+    } finally {
+      setLoading(false);
+    }
+  }, [genreId]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, refetch: fetchData };
 };
 
 // Hook for fetching show details
