@@ -16,7 +16,7 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
   className = '',
   priority = false 
 }) => {
-  const posterUrl = getPosterUrl(show.poster_path, 'w500');
+  const posterUrl = getPosterUrl(show.poster_path, 'w342');
   const fallbackUrl = '/placeholder-poster.svg';
 
   return (
@@ -32,7 +32,7 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
             alt={show.name}
             fill
             className="object-cover object-center transition-transform duration-300 group-hover/card:scale-110"
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            sizes="(max-width: 640px) 50vw, (max-width: 1200px) 25vw, 256px"
             priority={priority}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -92,7 +92,7 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
   className = '',
   priority = false 
 }) => {
-  const posterUrl = getPosterUrl(show.poster_path, 'w342');
+  const posterUrl = getPosterUrl(show.poster_path, 'w185');
   const fallbackUrl = '/placeholder-poster.svg';
 
   return (
@@ -107,7 +107,7 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
             alt={show.name}
             fill
             className="object-cover object-center transition-transform duration-300 group-hover/card:scale-110"
-            sizes="160px"
+            sizes="128px"
             priority={priority}
             onError={(e) => {
               const target = e.target as HTMLImageElement;

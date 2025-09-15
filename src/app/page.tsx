@@ -36,7 +36,7 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
               
-              <div className="absolute bottom-0 left-0 right-0 pt-24 md:pt-32 px-6 md:px-12 pb-6">
+              <div className="absolute bottom-0 left-0 right-0 pt-20 md:pt-28 px-6 md:px-12 pb-6">
                 <div className="max-w-4xl">
                   <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
                     {trendingData.results[0].name}

@@ -143,7 +143,7 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
               key={show.id}
               show={show}
               className="flex-shrink-0"
-              priority={index < 3} // Prioritize first 3 images
+              priority={index === 0}
             />
           ))}
         </div>

@@ -10,11 +10,13 @@ interface GenreCarouselProps {
 export const GenreCarousel: React.FC<GenreCarouselProps> = ({ genreId, title }) => {
   const { data, loading } = useGenreShows(genreId);
   return (
-    <HorizontalCarousel
-      title={title}
-      shows={data?.results || []}
-      loading={loading}
-    />
+    <div style={{ contentVisibility: 'auto', containIntrinsicSize: '420px' }}>
+      <HorizontalCarousel
+        title={title}
+        shows={data?.results || []}
+        loading={loading}
+      />
+    </div>
   );
 };
 
