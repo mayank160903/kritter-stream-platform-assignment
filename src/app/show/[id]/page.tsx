@@ -68,14 +68,14 @@ export default function ShowDetailsPage() {
       {/* Hero Section */}
       <section className="relative h-96 md:h-[500px] overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-[position:center_60%] md:bg-[position:center_55%] lg:bg-[position:center_50%] bg-no-repeat"
           style={{
             backgroundImage: `url(${backdropUrl})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
+        <div className="absolute bottom-0 left-0 right-0 pt-24 md:pt-28 px-6 md:px-12 pb-6">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row gap-6">
               {/* Poster */}

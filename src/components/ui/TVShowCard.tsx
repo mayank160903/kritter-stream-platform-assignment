@@ -22,16 +22,16 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
   return (
     <Link 
       href={`/show/${show.id}`}
-      className={`group block transition-transform duration-300 hover:scale-105 ${className}`}
+      className={`group/card block transition-transform duration-300 hover:scale-105 ${className}`}
     >
-      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800">
+      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800 w-64">
         {/* Poster Image */}
-        <div className="relative w-full h-72 overflow-hidden">
+        <div className="relative w-full h-80 overflow-hidden">
           <Image
             src={show.poster_path ? posterUrl : fallbackUrl}
             alt={show.name}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-110"
+            className="object-cover object-center transition-transform duration-300 group-hover/card:scale-110"
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
             priority={priority}
             onError={(e) => {
@@ -41,7 +41,7 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
           />
           
           {/* Gradient overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
           
           {/* Rating badge */}
           <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1 text-yellow-400 text-sm font-medium">
@@ -51,26 +51,26 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
         </div>
 
         {/* Show Info */}
-        <div className="p-4">
-          <h3 className="font-semibold text-white text-lg mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors">
+        <div className="p-4 space-y-3">
+          <h3 className="font-semibold text-white text-lg leading-tight line-clamp-2 group-hover/card:text-blue-400 transition-colors">
             {show.name}
           </h3>
           
           {show.overview && (
-            <p className="text-gray-300 text-sm line-clamp-3 mb-3">
+            <p className="text-gray-300 text-sm line-clamp-3 leading-relaxed">
               {truncateText(show.overview, 120)}
             </p>
           )}
           
-          <div className="flex items-center justify-between text-sm text-gray-400">
+          <div className="flex items-center justify-between text-sm text-gray-400 pt-1">
             {show.first_air_date && (
-              <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-4 h-4 flex-shrink-0" />
                 <span>{new Date(show.first_air_date).getFullYear()}</span>
               </div>
             )}
             
-            <div className="text-xs bg-gray-700 px-2 py-1 rounded">
+            <div className="text-xs bg-gray-700 px-2 py-1 rounded font-medium">
               {show.original_language?.toUpperCase()}
             </div>
           </div>
@@ -92,16 +92,16 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
   return (
     <Link 
       href={`/show/${show.id}`}
-      className={`group block transition-transform duration-300 hover:scale-105 ${className}`}
+      className={`group/card block transition-transform duration-300 hover:scale-105 ${className}`}
     >
-      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800">
-        <div className="relative w-32 h-48 overflow-hidden">
+      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800 w-40">
+        <div className="relative w-full h-56 overflow-hidden">
           <Image
             src={show.poster_path ? posterUrl : fallbackUrl}
             alt={show.name}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-110"
-            sizes="128px"
+            className="object-cover object-center transition-transform duration-300 group-hover/card:scale-110"
+            sizes="160px"
             priority={priority}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -109,7 +109,7 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
             }}
           />
           
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
           
           <div className="absolute top-1 right-1 bg-black/70 backdrop-blur-sm rounded-full px-1.5 py-0.5 flex items-center gap-1 text-yellow-400 text-xs font-medium">
             <Star className="w-2.5 h-2.5 fill-current" />
@@ -117,15 +117,16 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
           </div>
         </div>
 
-        <div className="p-2">
-          <h3 className="font-medium text-white text-sm line-clamp-2 group-hover:text-blue-400 transition-colors">
+        <div className="p-3 space-y-2">
+          <h3 className="font-medium text-white text-sm leading-tight line-clamp-2 group-hover/card:text-blue-400 transition-colors">
             {show.name}
           </h3>
           
           {show.first_air_date && (
-            <p className="text-gray-400 text-xs mt-1">
-              {new Date(show.first_air_date).getFullYear()}
-            </p>
+            <div className="flex items-center gap-1 text-gray-400 text-xs">
+              <Calendar className="w-3 h-3 flex-shrink-0" />
+              <span>{new Date(show.first_air_date).getFullYear()}</span>
+            </div>
           )}
         </div>
       </div>
