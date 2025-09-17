@@ -80,7 +80,7 @@ export default function ShowDetailsPage() {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row gap-6">
               {/* Poster */}
-              <div className="flex-shrink-0">
+              <div className="hidden md:block flex-shrink-0">
                 <Image
                   src={posterUrl}
                   alt={show.name}
