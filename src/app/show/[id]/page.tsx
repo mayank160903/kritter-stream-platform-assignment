@@ -48,7 +48,7 @@ export default function ShowDetailsPage() {
             <p className="text-gray-400 mb-6">The TV show you're looking for doesn't exist or has been removed.</p>
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -166,7 +166,7 @@ export default function ShowDetailsPage() {
                     onClick={() => setSelectedSeason(season.season_number)}
                     className={`px-4 py-2 rounded-lg transition-colors ${
                       selectedSeason === season.season_number
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-red-600 text-white'
                         : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                     }`}
                   >

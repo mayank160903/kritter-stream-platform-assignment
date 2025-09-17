@@ -15,9 +15,9 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
           {/* Logo */}
           <Link 
             href="/" 
-            className="flex items-center space-x-2 text-white hover:text-blue-400 transition-colors"
+            className="flex items-center space-x-2 text-white hover:text-red-400 transition-colors"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-red-600 to-gray-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">TV</span>
             </div>
             <span className="font-bold text-xl hidden sm:block">ShowHub</span>

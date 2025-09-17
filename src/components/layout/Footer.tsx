@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-white font-semibold">
-              <div className="w-7 h-7 bg-gradient-to-br from-blue-500 to-purple-600 rounded-md flex items-center justify-center">
+              <div className="w-7 h-7 bg-gradient-to-br from-red-600 to-gray-600 rounded-md flex items-center justify-center">
                 <span className="text-xs">TV</span>
               </div>
               <span>ShowHub</span>

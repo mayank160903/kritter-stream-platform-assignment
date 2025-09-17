@@ -54,7 +54,7 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
         <div className="p-4 space-y-3">
           {/* Fixed-height title area with hover marquee to reveal full title */}
           <div className="marquee h-12">
-            <h3 className="marquee-content font-semibold text-white text-lg leading-tight group-hover/card:text-blue-400 transition-colors">
+            <h3 className="marquee-content font-semibold text-white text-lg leading-tight group-hover/card:text-red-400 transition-colors">
               {show.name}
             </h3>
           </div>
@@ -125,7 +125,7 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
 
         <div className="p-3 space-y-2">
           <div className="marquee h-8">
-            <h3 className="marquee-content font-medium text-white text-sm leading-tight group-hover/card:text-blue-400 transition-colors">
+            <h3 className="marquee-content font-medium text-white text-sm leading-tight group-hover/card:text-red-400 transition-colors">
               {show.name}
             </h3>
           </div>

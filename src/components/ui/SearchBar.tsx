@@ -107,7 +107,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           onKeyDown={handleKeyDown}
           onFocus={() => query.length > 2 && setIsOpen(true)}
           placeholder={placeholder}
-          className="block w-full pl-10 pr-10 py-3 border border-gray-600 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+          className="block w-full pl-10 pr-10 py-3 border border-gray-600 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all duration-200"
         />
         
         {query && (
@@ -155,7 +155,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   onClick={() => handleShowSelect(show)}
                   className={`w-full p-3 rounded-lg text-left transition-colors ${
                     index === selectedIndex
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-red-600 text-white'
                       : 'hover:bg-gray-700 text-gray-200'
                   }`}
                 >
