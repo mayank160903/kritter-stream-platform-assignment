@@ -24,7 +24,7 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
       href={`/show/${show.id}`}
       className={`group/card block transition-transform duration-300 hover:scale-105 ${className}`}
     >
-      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800 w-64">
+      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800 w-full">
         {/* Poster Image */}
         <div className="relative w-full h-80 overflow-hidden">
           <Image
@@ -100,7 +100,7 @@ export const TVShowCardCompact: React.FC<TVShowCardProps> = ({
       href={`/show/${show.id}`}
       className={`group/card block transition-transform duration-300 hover:scale-105 ${className}`}
     >
-      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800 w-40">
+      <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800 w-full">
         <div className="relative w-full h-56 overflow-hidden">
           <Image
             src={show.poster_path ? posterUrl : fallbackUrl}

@@ -1,28 +1,20 @@
 'use client';
 
 import React from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { HorizontalCarousel } from '@/components/carousel/HorizontalCarousel';
 import { TV_GENRES } from '@/lib/genres';
 import { GenreCarousel } from '@/components/GenreCarousel';
 import { useTrendingShows, useTopRatedShows, usePopularShows } from '@/hooks/useTMDB';
-import { TVShow } from '@/types/tmdb';
 
 export default function Home() {
   const { data: trendingData, loading: trendingLoading } = useTrendingShows('day');
   const { data: topRatedData, loading: topRatedLoading } = useTopRatedShows();
   const { data: popularData, loading: popularLoading } = usePopularShows();
 
-  const handleShowSelect = (show: TVShow) => {
-    // Navigate to show details page
-    window.location.href = `/show/${show.id}`;
-  };
 
   return (
     <div className="min-h-screen bg-black">
-      <Header onShowSelect={handleShowSelect} />
-      
+
       <main className="pt-0 pb-16 space-y-12">
         {/* Hero Section */}
         <section className="relative h-96 md:h-[500px] overflow-hidden">
@@ -87,7 +79,6 @@ export default function Home() {
           ))}
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

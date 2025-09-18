@@ -142,7 +142,7 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
             <ShowCard
               key={show.id}
               show={show}
-              className="flex-shrink-0"
+              className="flex-shrink-0 w-48 sm:w-56 md:w-64"
               priority={index === 0}
             />
           ))}

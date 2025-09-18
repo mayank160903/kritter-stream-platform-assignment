@@ -4,13 +4,11 @@ import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { EpisodeCard } from '@/components/ui/EpisodeCard';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { useShowDetails, useSeasonDetails } from '@/hooks/useTMDB';
-import { getBackdropUrl, getPosterUrl, formatDate, formatRating, truncateText } from '@/lib/tmdb';
-import { ArrowLeft, Star, Calendar, Clock, Users, Globe } from 'lucide-react';
+import { getBackdropUrl, getPosterUrl, formatDate, formatRating } from '@/lib/tmdb';
+import { ArrowLeft, Star, Calendar, Users, Globe } from 'lucide-react';
 
 export default function ShowDetailsPage() {
   const params = useParams();
@@ -23,7 +21,6 @@ export default function ShowDetailsPage() {
   if (showLoading) {
     return (
       <div className="min-h-screen bg-black">
-        <Header />
         <div className="pt-8 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
             <LoadingSkeleton variant="card" className="h-96 mb-8" />
@@ -41,11 +38,10 @@ export default function ShowDetailsPage() {
   if (showError || !show) {
     return (
       <div className="min-h-screen bg-black">
-        <Header />
         <div className="pt-8 px-4 md:px-6">
           <div className="max-w-7xl mx-auto text-center">
             <h1 className="text-2xl font-bold text-white mb-4">Show Not Found</h1>
-            <p className="text-gray-400 mb-6">The TV show you're looking for doesn't exist or has been removed.</p>
+            <p className="text-gray-400 mb-6">The TV show you&apos;re looking for doesn&apos;t exist or has been removed.</p>
             <Link 
               href="/"
               className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors"
@@ -64,7 +60,6 @@ export default function ShowDetailsPage() {
 
   return (
     <div className="min-h-screen bg-black">
-      <Header />
       
       {/* Hero Section */}
       <section className="relative h-96 md:h-[500px] overflow-hidden">
@@ -97,9 +92,7 @@ export default function ShowDetailsPage() {
                 </h1>
                 
                 {show.tagline && (
-                  <p className="text-xl text-gray-300 mb-4 italic">
-                    "{show.tagline}"
-                  </p>
+                  <p className="text-xl text-gray-300 mb-4 italic">&quot;{show.tagline}&quot;</p>
                 )}
                 
                 <p className="text-lg text-gray-200 mb-6 line-clamp-4">
@@ -201,7 +194,6 @@ export default function ShowDetailsPage() {
           )}
         </div>
       </section>
-      <Footer />
     </div>
   );
 }
