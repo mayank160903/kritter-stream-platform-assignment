@@ -6,13 +6,11 @@ import { Star, Calendar, Clock } from 'lucide-react';
 
 interface EpisodeCardProps {
   episode: Episode;
-  showId: number;
   className?: string;
 }
 
 export const EpisodeCard: React.FC<EpisodeCardProps> = ({ 
   episode, 
-  showId,
   className = '' 
 }) => {
   const stillUrl = getStillUrl(episode.still_path, 'w780');

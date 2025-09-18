@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { TMDBService } from '@/lib/tmdb';
 import { TVShow, TVShowDetails, SeasonDetails, TMDBResponse } from '@/types/tmdb';
-import { TV_GENRES } from '@/lib/genres';
+// import { TV_GENRES } from '@/lib/genres';
 
 // Hook for fetching trending shows
 export const useTrendingShows = (timeWindow: 'day' | 'week' = 'day') => {

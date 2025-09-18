@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import { TVShow } from '@/types/tmdb';
 import { useSearchShows, useTypeaheadShows } from '@/hooks/useTMDB';
-import { TVShowCardCompact } from './TVShowCard';
+// import { TVShowCardCompact } from './TVShowCard';
 
 interface SearchBarProps {
   onShowSelect?: (show: TVShow) => void;
@@ -162,9 +163,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-16 bg-gray-600 rounded flex-shrink-0 overflow-hidden">
                       {show.poster_path ? (
-                        <img
+                        <Image
                           src={`https://image.tmdb.org/t/p/w92${show.poster_path}`}
                           alt={show.name}
+                          width={92}
+                          height={128}
                           className="w-full h-full object-cover"
                         />
                       ) : (
@@ -198,7 +201,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             </div>
           ) : query.length > 2 && !loading ? (
             <div className="p-4 text-gray-400 text-center">
-              No shows found for "{query}"
+              No shows found for &quot;{query}&quot;
             </div>
           ) : null}
         </div>

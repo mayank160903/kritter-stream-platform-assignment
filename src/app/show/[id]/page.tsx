@@ -183,7 +183,6 @@ export default function ShowDetailsPage() {
                 <EpisodeCard
                   key={episode.id}
                   episode={episode}
-                  showId={showId}
                 />
               ))}
             </div>

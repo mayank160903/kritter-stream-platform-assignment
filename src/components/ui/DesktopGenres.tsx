@@ -1,6 +1,7 @@
 import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 import Link from 'next/link';
+import { TV_GENRES } from '@/lib/genres';
 
 const DesktopGenres: React.FC = () => {
     const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ const DesktopGenres: React.FC = () => {
         {open && (
           <div className="absolute right-0 top-full bg-gray-900 border border-gray-700 rounded-lg shadow-lg min-w-[220px] z-50 pt-2">
             <div className="py-2 max-h-80 overflow-y-auto">
-              {require('@/lib/genres').TV_GENRES.map((g: {id:number; name:string}) => (
+              {TV_GENRES.map((g: {id:number; name:string}) => (
                 <Link
                   key={g.id}
                   href={`/genres/${g.id}`}
@@ -36,4 +37,4 @@ const DesktopGenres: React.FC = () => {
     );
   };
 
-export default DesktopGenres;
+export { DesktopGenres };
