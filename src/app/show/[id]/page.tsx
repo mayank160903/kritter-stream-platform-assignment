@@ -141,7 +141,7 @@ export default function ShowDetailsPage() {
                         backdrop_path: show.backdrop_path,
                         vote_average: show.vote_average,
                         first_air_date: show.first_air_date,
-                      } as any);
+                      });
                       showToast(wasFav ? `Removed bookmark for ${show.name}` : `Successfully bookmarked ${show.name}`);
                     }}
                     className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border shadow-sm backdrop-blur-sm transition-colors

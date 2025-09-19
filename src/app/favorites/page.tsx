@@ -3,6 +3,7 @@
 import React from 'react';
 import { TVShowCard } from '@/components/ui/TVShowCard';
 import { useFavorites } from '@/hooks/useFavorites';
+import type { TVShow } from '@/types/tmdb';
 
 export default function FavoritesPage() {
   const { list } = useFavorites();
@@ -21,7 +22,7 @@ export default function FavoritesPage() {
           ) : (
             <div className="mx-auto grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 place-items-stretch">
               {list.map((show) => (
-                <TVShowCard key={show.id} show={show as any} className="w-full" />
+                <TVShowCard key={show.id} show={show as TVShow} className="w-full" />
               ))}
             </div>
           )}
