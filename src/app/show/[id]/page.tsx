@@ -8,7 +8,9 @@ import { EpisodeCard } from '@/components/ui/EpisodeCard';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { useShowDetails, useSeasonDetails } from '@/hooks/useTMDB';
 import { getBackdropUrl, getPosterUrl, formatDate, formatRating } from '@/lib/tmdb';
-import { ArrowLeft, Star, Calendar, Users, Globe } from 'lucide-react';
+import { ArrowLeft, Star, Calendar, Users, Globe, Heart } from 'lucide-react';
+import { useFavorites } from '@/hooks/useFavorites';
+import { useToast } from '@/components/ui/Toast';
 
 export default function ShowDetailsPage() {
   const params = useParams();
@@ -16,6 +18,8 @@ export default function ShowDetailsPage() {
   const [selectedSeason, setSelectedSeason] = useState(1);
 
   const { data: show, loading: showLoading, error: showError } = useShowDetails(showId);
+  const { isFavorite, toggle } = useFavorites();
+  const { show: showToast } = useToast();
   const { data: seasonData, loading: seasonLoading } = useSeasonDetails(showId, selectedSeason);
 
   if (showLoading) {
@@ -87,9 +91,7 @@ export default function ShowDetailsPage() {
               
               {/* Show Info */}
               <div className="flex-1 text-white">
-                <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                  {show.name}
-                </h1>
+                <h1 className="text-4xl md:text-6xl font-bold mb-4">{show.name}</h1>
                 
                 {show.tagline && (
                   <p className="text-xl text-gray-300 mb-4 italic">&quot;{show.tagline}&quot;</p>
@@ -125,6 +127,32 @@ export default function ShowDetailsPage() {
                       <span>{show.origin_country.join(', ')}</span>
                     </div>
                   )}
+
+                  {/* Favorite pill button - highly visible */}
+                  <button
+                    type="button"
+                    aria-label={isFavorite(show.id) ? 'Remove from favorites' : 'Add to favorites'}
+                    onClick={() => {
+                      const wasFav = isFavorite(show.id);
+                      toggle({
+                        id: show.id,
+                        name: show.name,
+                        poster_path: show.poster_path,
+                        backdrop_path: show.backdrop_path,
+                        vote_average: show.vote_average,
+                        first_air_date: show.first_air_date,
+                      } as any);
+                      showToast(wasFav ? `Removed bookmark for ${show.name}` : `Successfully bookmarked ${show.name}`);
+                    }}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border shadow-sm backdrop-blur-sm transition-colors
+                      ${isFavorite(show.id)
+                        ? 'bg-red-600 text-white border-red-500 hover:bg-red-700'
+                        : 'bg-black/70 text-white border-gray-700 hover:bg-black/80'}
+                    `}
+                  >
+                    <Heart className={`w-4 h-4 ${isFavorite(show.id) ? 'fill-current' : ''}`} />
+                    <span className="text-sm">{isFavorite(show.id) ? 'Bookmarked' : 'Bookmark'}</span>
+                  </button>
                 </div>
                 
                 {show.genres && show.genres.length > 0 && (

@@ -19,6 +19,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [isTyping, setIsTyping] = useState(false);
   
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,11 +27,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const { data: searchResults, loading, error } = useSearchShows(query, query.length > 2);
   const { suggestions } = useTypeaheadShows(query);
 
+  const typingTimer = useRef<NodeJS.Timeout | null>(null);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
     setIsOpen(value.length > 2);
     setSelectedIndex(-1);
+    setIsTyping(true);
+    if (typingTimer.current) clearTimeout(typingTimer.current);
+    typingTimer.current = setTimeout(() => setIsTyping(false), 400);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -199,7 +205,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 </div>
               )}
             </div>
-          ) : query.length > 2 && !loading ? (
+          ) : query.length > 2 && !loading && !isTyping ? (
             <div className="p-4 text-gray-400 text-center">
               No shows found for &quot;{query}&quot;
             </div>

@@ -1,9 +1,12 @@
+"use client";
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { TVShow } from '@/types/tmdb';
 import { getPosterUrl, formatRating, truncateText } from '@/lib/tmdb';
-import { Star, Calendar } from 'lucide-react';
+import { Star, Calendar, Heart } from 'lucide-react';
+import { useFavorites } from '@/hooks/useFavorites';
+import { useToast } from '@/components/ui/Toast';
 
 interface TVShowCardProps {
   show: TVShow;
@@ -18,6 +21,8 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
 }) => {
   const posterUrl = getPosterUrl(show.poster_path, 'w342');
   const fallbackUrl = '/placeholder-poster.svg';
+  const { toggle, isFavorite } = useFavorites();
+  const { show: showToast } = useToast();
 
   return (
     <Link 
@@ -43,6 +48,21 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
           {/* Gradient overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
           
+          {/* Favorite toggle */}
+          <button
+            type="button"
+            aria-label={isFavorite(show.id) ? 'Remove from favorites' : 'Add to favorites'}
+            onClick={(e) => { 
+              e.preventDefault(); 
+              const wasFav = isFavorite(show.id);
+              toggle(show);
+              showToast(wasFav ? `Removed bookmark for ${show.name}` : `Successfully bookmarked ${show.name}`);
+            }}
+            className="absolute top-2 left-2 bg-black/70 backdrop-blur-sm rounded-full p-1 text-white hover:text-red-400"
+          >
+            <Heart className={`w-5 h-5 ${isFavorite(show.id) ? 'fill-red-600 text-red-600' : ''}`} />
+          </button>
+
           {/* Rating badge */}
           <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1 text-yellow-400 text-sm font-medium">
             <Star className="w-3 h-3 fill-current" />

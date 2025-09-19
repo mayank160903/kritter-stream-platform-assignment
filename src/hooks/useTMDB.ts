@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { TMDBService } from '@/lib/tmdb';
 import { TVShow, TVShowDetails, SeasonDetails, TMDBResponse } from '@/types/tmdb';
 // import { TV_GENRES } from '@/lib/genres';
+import { cacheGet, cacheSet } from '@/lib/cache';
 
 // Hook for fetching trending shows
 export const useTrendingShows = (timeWindow: 'day' | 'week' = 'day') => {
@@ -13,8 +14,16 @@ export const useTrendingShows = (timeWindow: 'day' | 'week' = 'day') => {
     try {
       setLoading(true);
       setError(null);
+      const cacheKey = `trending:${timeWindow}`;
+      const cached = cacheGet<TMDBResponse<TVShow>>(cacheKey);
+      if (cached) {
+        setData(cached);
+        setLoading(false);
+        return;
+      }
       const result = await TMDBService.getTrendingShows({ time_window: timeWindow });
       setData(result);
+      cacheSet(cacheKey, result, 20 * 60_000, 'local');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch trending shows');
     } finally {
@@ -39,8 +48,16 @@ export const useTopRatedShows = () => {
     try {
       setLoading(true);
       setError(null);
+      const cacheKey = 'top-rated';
+      const cached = cacheGet<TMDBResponse<TVShow>>(cacheKey);
+      if (cached) {
+        setData(cached);
+        setLoading(false);
+        return;
+      }
       const result = await TMDBService.getTopRatedShows();
       setData(result);
+      cacheSet(cacheKey, result, 30 * 60_000, 'local');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch top rated shows');
     } finally {
@@ -65,8 +82,16 @@ export const usePopularShows = () => {
     try {
       setLoading(true);
       setError(null);
+      const cacheKey = 'popular';
+      const cached = cacheGet<TMDBResponse<TVShow>>(cacheKey);
+      if (cached) {
+        setData(cached);
+        setLoading(false);
+        return;
+      }
       const result = await TMDBService.getPopularShows();
       setData(result);
+      cacheSet(cacheKey, result, 20 * 60_000, 'local');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch popular shows');
     } finally {
@@ -96,8 +121,16 @@ export const useSearchShows = (query: string, enabled: boolean = true) => {
     try {
       setLoading(true);
       setError(null);
+      const cacheKey = `search:${searchQuery.toLowerCase()}`;
+      const cached = cacheGet<TMDBResponse<TVShow>>(cacheKey);
+      if (cached) {
+        setData(cached);
+        setLoading(false);
+        return;
+      }
       const result = await TMDBService.searchShows({ query: searchQuery });
       setData(result);
+      cacheSet(cacheKey, result, 5 * 60_000, 'session');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to search shows');
     } finally {
@@ -131,7 +164,15 @@ export const useTypeaheadShows = (query: string) => {
     try {
       setLoading(true);
       setError(null);
-      const result = await TMDBService.searchShows({ query: searchQuery });
+      const cacheKey = `typeahead:${searchQuery.toLowerCase()}`;
+      const cached = cacheGet<TMDBResponse<TVShow>>(cacheKey);
+      let result: TMDBResponse<TVShow> | null = null;
+      if (cached) {
+        result = cached;
+      } else {
+        result = await TMDBService.searchShows({ query: searchQuery });
+        cacheSet(cacheKey, result, 5 * 60_000, 'session');
+      }
       const names = (result.results || [])
         .map((s) => s.name)
         .filter(Boolean)

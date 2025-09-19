@@ -70,6 +70,12 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
             >
               Top Rated
             </Link>
+            <Link 
+              href="/favorites" 
+              className="text-gray-300 hover:text-white transition-colors font-medium"
+            >
+              Favorites
+            </Link>
             <DesktopGenres />
           </nav>
 
@@ -104,6 +110,7 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
                   <Link href="/" className="px-4 py-3 text-gray-300 hover:bg-gray-900 hover:text-white transition-colors" onClick={() => setMobileOpen(false)}>Home</Link>
                   <Link href="/trending" className="px-4 py-3 text-gray-300 hover:bg-gray-900 hover:text-white transition-colors" onClick={() => setMobileOpen(false)}>Trending</Link>
                   <Link href="/top-rated" className="px-4 py-3 text-gray-300 hover:bg-gray-900 hover:text-white transition-colors" onClick={() => setMobileOpen(false)}>Top Rated</Link>
+                  <Link href="/favorites" className="px-4 py-3 text-gray-300 hover:bg-gray-900 hover:text-white transition-colors" onClick={() => setMobileOpen(false)}>Favorites</Link>
                   <button 
                     className="text-left px-4 py-3 text-gray-300 hover:bg-gray-900 hover:text-white transition-colors"
                     onClick={() => setMobileGenresOpen(prev => !prev)}
