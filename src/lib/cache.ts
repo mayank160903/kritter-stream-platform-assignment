@@ -18,7 +18,6 @@ export function cacheGet<T>(key: string): T | null {
     sessionStorage.removeItem(key);
     localStorage.removeItem(key);
   } catch {
-    // Ignore storage errors (e.g., SSR or private mode)
   }
   return null;
 }
@@ -35,7 +34,6 @@ export function cacheSet<T>(
     const store = persistent === 'session' ? sessionStorage : localStorage;
     store.setItem(key, JSON.stringify(item));
   } catch {
-    // Ignore storage errors
   }
 }
 

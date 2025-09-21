@@ -107,7 +107,6 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
       </h2>
       
       <div className="relative group">
-        {/* Left scroll button */}
         {canScrollLeft && (
           <button
             onClick={() => scroll('left')}
@@ -118,7 +117,6 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
           </button>
         )}
 
-        {/* Right scroll button */}
         {canScrollRight && (
           <button
             onClick={() => scroll('right')}
@@ -129,7 +127,6 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
           </button>
         )}
 
-        {/* Scrollable container */}
         <div
           ref={scrollContainerRef}
           className="flex gap-4 px-4 md:px-6 overflow-x-auto scrollbar-hide scroll-smooth"
@@ -150,48 +147,4 @@ export const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
       </div>
     </div>
   );
-};
-
-// Custom hook for touch/swipe support on mobile
-export const useTouchScroll = (ref: React.RefObject<HTMLDivElement>) => {
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  const minSwipeDistance = 50;
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || !ref.current) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe || isRightSwipe) {
-      const scrollAmount = 300;
-      const currentScroll = ref.current.scrollLeft;
-      const targetScroll = isLeftSwipe 
-        ? currentScroll + scrollAmount 
-        : currentScroll - scrollAmount;
-      
-      ref.current.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  return {
-    onTouchStart,
-    onTouchMove,
-    onTouchEnd,
-  };
 };

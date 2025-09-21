@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { TMDBService } from '@/lib/tmdb';
 import { TVShow, TVShowDetails, SeasonDetails, TMDBResponse } from '@/types/tmdb';
-// import { TV_GENRES } from '@/lib/genres';
 import { cacheGet, cacheSet } from '@/lib/cache';
 
-// Hook for fetching trending shows
 export const useTrendingShows = (timeWindow: 'day' | 'week' = 'day') => {
   const [data, setData] = useState<TMDBResponse<TVShow> | null>(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +36,6 @@ export const useTrendingShows = (timeWindow: 'day' | 'week' = 'day') => {
   return { data, loading, error, refetch: fetchData };
 };
 
-// Hook for fetching top rated shows
 export const useTopRatedShows = () => {
   const [data, setData] = useState<TMDBResponse<TVShow> | null>(null);
   const [loading, setLoading] = useState(true);
@@ -72,7 +69,6 @@ export const useTopRatedShows = () => {
   return { data, loading, error, refetch: fetchData };
 };
 
-// Hook for fetching popular shows
 export const usePopularShows = () => {
   const [data, setData] = useState<TMDBResponse<TVShow> | null>(null);
   const [loading, setLoading] = useState(true);
@@ -106,7 +102,6 @@ export const usePopularShows = () => {
   return { data, loading, error, refetch: fetchData };
 };
 
-// Hook for searching shows
 export const useSearchShows = (query: string, enabled: boolean = true) => {
   const [data, setData] = useState<TMDBResponse<TVShow> | null>(null);
   const [loading, setLoading] = useState(false);
@@ -141,7 +136,7 @@ export const useSearchShows = (query: string, enabled: boolean = true) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       searchShows(query);
-    }, 300); // Debounce search by 300ms
+    }, 300);
 
     return () => clearTimeout(timeoutId);
   }, [query, searchShows]);
@@ -149,7 +144,6 @@ export const useSearchShows = (query: string, enabled: boolean = true) => {
   return { data, loading, error, searchShows };
 };
 
-// Lightweight type-ahead suggestions (names only)
 export const useTypeaheadShows = (query: string) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -195,7 +189,6 @@ export const useTypeaheadShows = (query: string) => {
   return { suggestions, loading, error };
 };
 
-// Hook to fetch shows for a single genre id
 export const useGenreShows = (genreId: number) => {
   const [data, setData] = useState<TMDBResponse<TVShow> | null>(null);
   const [loading, setLoading] = useState(true);
@@ -221,7 +214,6 @@ export const useGenreShows = (genreId: number) => {
   return { data, loading, error, refetch: fetchData };
 };
 
-// Hook for fetching show details
 export const useShowDetails = (showId: number | null) => {
   const [data, setData] = useState<TVShowDetails | null>(null);
   const [loading, setLoading] = useState(false);
@@ -253,7 +245,6 @@ export const useShowDetails = (showId: number | null) => {
   return { data, loading, error, refetch: fetchShowDetails };
 };
 
-// Hook for fetching season details
 export const useSeasonDetails = (showId: number | null, seasonNumber: number | null) => {
   const [data, setData] = useState<SeasonDetails | null>(null);
   const [loading, setLoading] = useState(false);

@@ -35,21 +35,18 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
   );
 };
 
-// Poster skeleton for show cards
 export const PosterSkeleton: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div className={`animate-pulse bg-gray-700 w-48 h-72 rounded-lg ${className}`}>
     <span className="sr-only">Loading poster...</span>
   </div>
 );
 
-// Episode skeleton
 export const EpisodeSkeleton: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div className={`animate-pulse bg-gray-700 w-full h-24 rounded-lg ${className}`}>
     <span className="sr-only">Loading episode...</span>
   </div>
 );
 
-// Text skeleton
 export const TextSkeleton: React.FC<{ 
   lines?: number; 
   className?: string; 

@@ -10,7 +10,6 @@ import {
   TMDBConfig,
 } from '@/types/tmdb';
 
-// API Configuration
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL || 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p';
@@ -19,7 +18,6 @@ if (!API_KEY) {
   throw new Error('TMDB API key is not configured. Please set NEXT_PUBLIC_TMDB_API_KEY in your environment variables.');
 }
 
-// Create axios instance with default config
 const tmdbApi = axios.create({
   baseURL: BASE_URL,
   params: {
@@ -28,9 +26,7 @@ const tmdbApi = axios.create({
   },
 });
 
-// API Service Class
 export class TMDBService {
-  // Get trending TV shows
   static async getTrendingShows(params: TrendingParams = {}): Promise<TMDBResponse<TVShow>> {
     const { time_window = 'day', page = 1, language = 'en-US' } = params;
     
@@ -45,7 +41,6 @@ export class TMDBService {
     }
   }
 
-  // Get top rated TV shows
   static async getTopRatedShows(params: TopRatedParams = {}): Promise<TMDBResponse<TVShow>> {
     const { page = 1, language = 'en-US' } = params;
     
@@ -60,7 +55,6 @@ export class TMDBService {
     }
   }
 
-  // Get popular TV shows
   static async getPopularShows(params: TopRatedParams = {}): Promise<TMDBResponse<TVShow>> {
     const { page = 1, language = 'en-US' } = params;
     
@@ -75,7 +69,6 @@ export class TMDBService {
     }
   }
 
-  // Discover TV shows by genre
   static async getShowsByGenre(genreId: number, page: number = 1, language: string = 'en-US'): Promise<TMDBResponse<TVShow>> {
     try {
       const response = await tmdbApi.get('/discover/tv', {
@@ -93,7 +86,6 @@ export class TMDBService {
     }
   }
 
-  // Search TV shows
   static async searchShows(params: SearchParams): Promise<TMDBResponse<TVShow>> {
     const { query, page = 1, language = 'en-US' } = params;
     
@@ -112,7 +104,6 @@ export class TMDBService {
     }
   }
 
-  // Get TV show details
   static async getShowDetails(showId: number): Promise<TVShowDetails> {
     try {
       const response = await tmdbApi.get(`/tv/${showId}`);
@@ -123,7 +114,6 @@ export class TMDBService {
     }
   }
 
-  // Get season details with episodes
   static async getSeasonDetails(showId: number, seasonNumber: number): Promise<SeasonDetails> {
     try {
       const response = await tmdbApi.get(`/tv/${showId}/season/${seasonNumber}`);
@@ -134,7 +124,6 @@ export class TMDBService {
     }
   }
 
-  // Get TMDB configuration (for image URLs)
   static async getConfiguration(): Promise<TMDBConfig> {
     try {
       const response = await tmdbApi.get('/configuration');
@@ -146,10 +135,9 @@ export class TMDBService {
   }
 }
 
-// Image URL helpers
 export const getImageUrl = (path: string | null, size: string = 'w500'): string => {
   if (!path) {
-    return '/placeholder-poster.svg'; // Fallback image
+    return '/placeholder-poster.svg';
   }
   return `${IMAGE_BASE_URL}/${size}${path}`;
 };
@@ -166,7 +154,6 @@ export const getStillUrl = (path: string | null, size: string = 'w780'): string 
   return getImageUrl(path, size);
 };
 
-// Utility functions
 export const formatDate = (dateString: string): string => {
   if (!dateString) return 'TBA';
   return new Date(dateString).toLocaleDateString('en-US', {

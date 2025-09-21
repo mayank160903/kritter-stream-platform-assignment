@@ -16,7 +16,6 @@ export default function Home() {
     <div className="min-h-screen bg-black">
 
       <main className="pt-0 pb-16 space-y-12">
-        {/* Hero Section */}
         <section className="relative h-96 md:h-[500px] overflow-hidden">
           {trendingData?.results?.[0] && (
             <div className="absolute inset-0">
@@ -53,7 +52,6 @@ export default function Home() {
           )}
         </section>
 
-        {/* TV Show Carousels */}
         <div className="space-y-12">
           <HorizontalCarousel
             title="Trending Today"
@@ -72,8 +70,7 @@ export default function Home() {
             shows={popularData?.results || []}
             loading={popularLoading}
           />
-
-          {/* Genre carousels */}
+ 
           {TV_GENRES.slice(0, 6).map((genre) => (
             <GenreCarousel key={genre.id} genreId={genre.id} title={genre.name} />
           ))}

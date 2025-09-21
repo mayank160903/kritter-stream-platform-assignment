@@ -18,7 +18,6 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-/* Custom scrollbar styles */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -28,7 +27,6 @@ body {
   display: none;
 }
 
-/* Line clamp utilities */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -43,18 +41,15 @@ body {
   overflow: hidden;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom focus styles */
 .focus-visible:focus {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
-/* Loading animation */
 @keyframes shimmer {
   0% {
     background-position: -200px 0;
@@ -70,7 +65,6 @@ html {
   background-size: 200px 100%;
 }
 
-/* Marquee for overflowing titles inside fixed-height containers */
 .marquee {
   position: relative;
   overflow: hidden;

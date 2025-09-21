@@ -15,8 +15,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileGenresOpen, setMobileGenresOpen] = useState(false);
-  
-  // Lock body scroll when mobile menu is open
+
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
@@ -31,7 +30,6 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
     <header className="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link 
             href="/" 
             className="flex items-center space-x-2 text-white hover:text-red-400 transition-colors"
@@ -42,7 +40,6 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
             <span className="font-bold text-xl hidden sm:block">ShowHub</span>
           </Link>
 
-          {/* Search Bar */}
           <div className="flex-1 max-w-lg mx-8">
             <SearchBar 
               onShowSelect={onShowSelect}
@@ -50,7 +47,6 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
             />
           </div>
 
-          {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link 
               href="/" 
@@ -79,7 +75,6 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
             <DesktopGenres />
           </nav>
 
-          {/* Mobile menu button */}
           <button 
             className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
             aria-label="Open menu"
@@ -92,12 +87,9 @@ export const Header: React.FC<HeaderProps> = ({ onShowSelect }) => {
             </svg>
           </button>
         </div>
-        {/* Mobile navigation drawer (portal to body to avoid clipping by header effects) */}
         {mobileOpen && createPortal(
           <div className="fixed inset-0 z-[9999] md:hidden" aria-modal="true" role="dialog">
-            {/* Backdrop */}
             <div className="absolute inset-0 bg-black/70" onClick={() => setMobileOpen(false)} />
-            {/* Sliding panel */}
             <div className="absolute left-0 top-0 h-full w-80 max-w-[85%] bg-black border-r border-gray-800 shadow-2xl flex flex-col">
               <div className="flex items-center justify-between px-4 h-16 border-b border-gray-800 flex-shrink-0">
                 <span className="text-white font-semibold">Menu</span>

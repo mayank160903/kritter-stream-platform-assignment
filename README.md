@@ -1,5 +1,7 @@
 # ShowHub - TV Show Discovery Platform
 
+View Website - [deployed vercel link](https://mayank-binge-and-chill.vercel.app/)
+
 A modern, Netflix-inspired TV show discovery platform built with Next.js, TypeScript, and Tailwind CSS. Discover trending, top-rated, and popular TV shows with a beautiful, responsive interface.
 
 ## 🚀 Features
@@ -41,7 +43,7 @@ A modern, Netflix-inspired TV show discovery platform built with Next.js, TypeSc
 
 ### 1. Clone the Repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/mayank160903/kritter-stream-platform-assignment
 cd tv-show-discovery
 ```
 
@@ -95,36 +97,6 @@ src/
 └── public/                # Static assets
 ```
 
-## 🎨 Key Components
-
-### HorizontalCarousel
-- Smooth horizontal scrolling
-- Navigation buttons
-- Touch/swipe support
-- Loading states
-
-### TVShowCard
-- Responsive show cards
-- Hover animations
-- Rating display
-- Fallback images
-
-### SearchBar
-- Debounced search
-- Type-ahead suggestions
-- Keyboard navigation
-- Loading indicators
-
-## 🔧 API Integration
-
-The app integrates with TMDB API endpoints:
-
-- `GET /trending/tv/day` - Trending shows
-- `GET /tv/top_rated` - Top rated shows  
-- `GET /tv/popular` - Popular shows
-- `GET /search/tv` - Search shows
-- `GET /tv/{id}` - Show details
-- `GET /tv/{id}/season/{season_number}` - Season episodes
 
 ## 📱 Responsive Design
 
@@ -132,60 +104,9 @@ The app integrates with TMDB API endpoints:
 - **Tablet**: Optimized grid layouts
 - **Desktop**: Hover effects, navigation buttons
 
-## 🚀 Deployment
-
-### Vercel (Recommended)
-1. Push code to GitHub
-2. Connect repository to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy automatically
-
-### Netlify
-1. Build the project: `npm run build`
-2. Deploy the `out` folder to Netlify
-3. Add environment variables in Netlify dashboard
-
-## 🎯 Performance
-
-- **Lighthouse Score**: Target >85
-- **Image Optimization**: Next.js Image component
-- **Code Splitting**: Automatic with Next.js
-- **Lazy Loading**: Images and components
-- **Caching**: API response caching
-
 ## 🔮 Future Enhancements
 
-- [ ] Episode viewer with vertical scrolling
-- [ ] User favorites/bookmarks
 - [ ] Advanced filtering and sorting
 - [ ] User reviews and ratings
-- [ ] Offline support with PWA
 - [ ] Dark/light theme toggle
 - [ ] Social sharing features
-
-## 🐛 Known Issues
-
-- Placeholder images need optimization
-- Episode viewer not yet implemented
-- Search results limited to 8 items
-- No pagination for carousels
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
-## 📞 Support
-
-For support, email your-email@example.com or create an issue in the repository.
-
----
-
-Built with ❤️ using Next.js and TMDB API

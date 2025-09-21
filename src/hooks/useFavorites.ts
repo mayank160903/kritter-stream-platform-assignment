@@ -5,7 +5,7 @@ import { TVShow } from "@/types/tmdb";
 
 const STORAGE_KEY = "favorites:v2";
 const UPDATE_EVENT = "favorites:update";
-const EXPIRY_MS = 2 * 60 * 60 * 1000; // 2 hours
+const EXPIRY_MS = 2 * 60 * 60 * 1000; 
 
 export type FavoriteShow = Pick<
   TVShow,
@@ -39,12 +39,10 @@ export function useFavorites() {
     try {
       const payload = { data: next, savedAt: Date.now() };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-      // Defer cross-component sync to avoid setState during render warnings
       setTimeout(() => window.dispatchEvent(new Event(UPDATE_EVENT)), 0);
     } catch {}
   }, []);
 
-  // Sync across components/tabs
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === STORAGE_KEY) readFromStorage();

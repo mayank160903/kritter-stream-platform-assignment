@@ -1,4 +1,3 @@
-// TMDB API Response Types
 export interface TMDBResponse<T> {
   page: number;
   results: T[];
@@ -120,7 +119,6 @@ export interface SeasonDetails {
   season_number: number;
 }
 
-// Search and API types
 export interface SearchParams {
   query: string;
   page?: number;
@@ -138,7 +136,6 @@ export interface TopRatedParams {
   language?: string;
 }
 
-// Image configuration
 export interface ImageConfig {
   base_url: string;
   secure_base_url: string;

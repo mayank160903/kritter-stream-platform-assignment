@@ -30,7 +30,6 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
       className={`group/card block transition-transform duration-300 hover:scale-105 ${className}`}
     >
       <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-800 w-full">
-        {/* Poster Image */}
         <div className="relative w-full h-80 overflow-hidden">
           <Image
             src={show.poster_path ? posterUrl : fallbackUrl}
@@ -45,10 +44,8 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
             }}
           />
           
-          {/* Gradient overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
           
-          {/* Favorite toggle */}
           <button
             type="button"
             aria-label={isFavorite(show.id) ? 'Remove from favorites' : 'Add to favorites'}
@@ -63,23 +60,19 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
             <Heart className={`w-5 h-5 ${isFavorite(show.id) ? 'fill-red-600 text-red-600' : ''}`} />
           </button>
 
-          {/* Rating badge */}
           <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1 text-yellow-400 text-sm font-medium">
             <Star className="w-3 h-3 fill-current" />
             <span>{formatRating(show.vote_average)}</span>
           </div>
         </div>
 
-        {/* Show Info */}
         <div className="p-4 space-y-3">
-          {/* Fixed-height title area with hover marquee to reveal full title */}
           <div className="marquee h-12">
             <h3 className="marquee-content font-semibold text-white text-lg leading-tight group-hover/card:text-red-400 transition-colors">
               {show.name}
             </h3>
           </div>
           
-          {/* Fixed-height overview area to keep cards equal */}
           {show.overview ? (
             <p className="text-gray-300 text-sm line-clamp-3 leading-relaxed h-[3.75rem]">
               {truncateText(show.overview, 120)}
@@ -106,7 +99,6 @@ export const TVShowCard: React.FC<TVShowCardProps> = ({
   );
 };
 
-// Compact version for smaller spaces
 export const TVShowCardCompact: React.FC<TVShowCardProps> = ({ 
   show, 
   className = '',

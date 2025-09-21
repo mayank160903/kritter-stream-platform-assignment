@@ -31,12 +31,10 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
           }}
         />
         
-        {/* Episode number badge */}
         <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-medium">
           E{episode.episode_number}
         </div>
         
-        {/* Rating badge */}
         {episode.vote_average > 0 && (
           <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1 text-yellow-400 text-sm">
             <Star className="w-3 h-3 fill-current" />

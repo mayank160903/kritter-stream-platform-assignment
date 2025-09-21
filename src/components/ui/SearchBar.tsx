@@ -3,7 +3,6 @@ import { Search, X, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { TVShow } from '@/types/tmdb';
 import { useSearchShows, useTypeaheadShows } from '@/hooks/useTMDB';
-// import { TVShowCardCompact } from './TVShowCard';
 
 interface SearchBarProps {
   onShowSelect?: (show: TVShow) => void;
@@ -81,7 +80,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     inputRef.current?.focus();
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
@@ -96,7 +94,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div ref={searchRef} className={`relative ${className}`}>
-      {/* Search Input */}
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           {loading ? (
@@ -128,7 +125,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         )}
       </div>
 
-      {/* Search Results Dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-gray-800 border border-gray-600 rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto">
           {error ? (
@@ -137,7 +133,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             </div>
           ) : searchResults?.results && searchResults.results.length > 0 ? (
             <div className="p-2">
-              {/* Typeahead suggestions row */}
               {suggestions.length > 0 && (
                 <div className="px-2 pb-2">
                   <div className="flex flex-wrap gap-2">
